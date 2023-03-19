@@ -45,7 +45,7 @@ public class OrderCodeGenerator {
 		gc.setFileOverride(true);
 		//生成路径
 		gc.setOutputDir(System.getProperty("user.dir") + "/online-education-generator/src/main/java");
-		gc.setAuthor("itcast");
+		gc.setAuthor("silence");
 		gc.setOpen(false);
 		gc.setSwagger2(false);
 		gc.setServiceName("%sService");

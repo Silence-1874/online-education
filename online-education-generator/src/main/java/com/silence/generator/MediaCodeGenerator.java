@@ -42,7 +42,7 @@ public class MediaCodeGenerator {
 		GlobalConfig gc = new GlobalConfig();
 		gc.setFileOverride(true);
 		gc.setOutputDir(System.getProperty("user.dir") + "/online-education-generator/src/main/java");
-		gc.setAuthor("itcast");
+		gc.setAuthor("silence");
 		gc.setOpen(false);
 		gc.setSwagger2(false);
 		gc.setServiceName("%sService");
