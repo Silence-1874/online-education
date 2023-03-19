@@ -8,4 +8,11 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>online-education-content-api</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.silence</groupId>
+            <artifactId>online-education-content-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
