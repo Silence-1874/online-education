@@ -1,4 +1,4 @@
-package com.silence.model.po;
+package com.silence.content.model.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

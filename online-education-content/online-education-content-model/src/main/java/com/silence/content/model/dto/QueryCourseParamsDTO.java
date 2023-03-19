@@ -1,4 +1,4 @@
-package com.silence.model.dto;
+package com.silence.content.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

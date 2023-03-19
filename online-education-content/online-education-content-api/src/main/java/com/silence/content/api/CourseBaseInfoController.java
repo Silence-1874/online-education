@@ -2,8 +2,8 @@ package com.silence.content.api;
 
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
-import com.silence.model.dto.QueryCourseParamsDTO;
-import com.silence.model.po.CourseBase;
+import com.silence.content.model.dto.QueryCourseParamsDTO;
+import com.silence.content.model.po.CourseBase;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
