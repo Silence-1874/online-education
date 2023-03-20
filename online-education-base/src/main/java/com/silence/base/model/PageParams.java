@@ -3,6 +3,7 @@ package com.silence.base.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author silence
@@ -10,6 +11,7 @@ import lombok.Data;
  * @Date 2023/3/18
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class PageParams {
 
