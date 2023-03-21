@@ -7,9 +7,11 @@ import com.silence.base.model.PageResult;
 import com.silence.content.mapper.CourseBaseMapper;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.po.CourseBase;
+import com.silence.content.service.CourseBaseInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -48,6 +50,26 @@ class OnlineEducationContentServiceApplicationTests {
         long total = pageResult.getTotal();
         // 准备返回数据
         PageResult<CourseBase> courseBasePageResult = new PageResult<>(items, total, pageParams.getPageNo(), pageParams.getPageSize());
+        System.out.println(courseBasePageResult);
+    }
+
+    @Autowired
+    private CourseBaseInfoService courseBaseInfoService;
+
+    @Test
+    void testCourseBaseService() {
+        //查询条件
+        QueryCourseParamsDTO queryCourseParamsDto = new QueryCourseParamsDTO();
+        queryCourseParamsDto.setCourseName("java");
+        queryCourseParamsDto.setAuditStatus("202004");
+        queryCourseParamsDto.setPublishStatus("203001");
+
+        //分页参数
+        PageParams pageParams = new PageParams();
+        pageParams.setPageNo(1L);
+        pageParams.setPageSize(3L);
+
+        PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, queryCourseParamsDto);
         System.out.println(courseBasePageResult);
     }
 
