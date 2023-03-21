@@ -4,8 +4,10 @@ import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.po.CourseBase;
+import com.silence.content.service.CourseBaseInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CourseBaseInfoController {
 
+    @Autowired
+    private CourseBaseInfoService courseBaseInfoService;
+
     @ApiOperation("课程查询接口")
     @PostMapping(value = "/course/list")
     public PageResult<CourseBase> list(PageParams pageParams,
                                        @RequestBody(required = false) QueryCourseParamsDTO queryCourseParams) {
-        return null;
+        PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, queryCourseParams);
+        return courseBasePageResult;
     }
 
 }
