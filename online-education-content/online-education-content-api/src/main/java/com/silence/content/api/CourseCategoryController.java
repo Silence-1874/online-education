@@ -1,23 +1,30 @@
 package com.silence.content.api;
 
+import com.silence.content.model.dto.CourseCategoryTreeDTO;
 import com.silence.content.service.CourseCategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
- * <p>
- * 课程分类 前端控制器
- * </p>
- *
- * @author silence
+ * @Author silence
+ * @Description 课程分类接口
+ * @Date 2023/3/23
  */
 @Slf4j
 @RestController
-@RequestMapping("courseCategory")
 public class CourseCategoryController {
 
     @Autowired
     private CourseCategoryService courseCategoryService;
+
+    @GetMapping("/course-query/tree-nodes")
+    public List<CourseCategoryTreeDTO> queryTreeNodes() {
+        return null;
+    }
+
 }
+
