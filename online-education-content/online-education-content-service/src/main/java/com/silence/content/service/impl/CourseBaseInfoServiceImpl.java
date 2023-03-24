@@ -3,6 +3,7 @@ package com.silence.content.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.silence.base.exception.MyException;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
 import com.silence.content.mapper.CourseBaseMapper;
@@ -70,22 +71,22 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
     public CourseBaseInfoDTO createCourseBase(Long companyId, AddCourseDTO addCourseDTO) {
         // 参数合法性校验
         if (StringUtils.isBlank(addCourseDTO.getName())) {
-            throw new RuntimeException("课程名称为空");
+            throw new MyException("课程名称为空");
         }
         if (StringUtils.isBlank(addCourseDTO.getMt())) {
-            throw new RuntimeException("课程分类为空");
+            throw new MyException("课程分类为空");
         }
         if (StringUtils.isBlank(addCourseDTO.getSt())) {
-            throw new RuntimeException("课程分类为空");
+            throw new MyException("课程分类为空");
         }
         if (StringUtils.isBlank(addCourseDTO.getGrade())) {
-            throw new RuntimeException("课程等级为空");
+            throw new MyException("课程等级为空");
         }
         if (StringUtils.isBlank(addCourseDTO.getUsers())) {
-            throw new RuntimeException("适用人群为空");
+            throw new MyException("适用人群为空");
         }
         if (StringUtils.isBlank(addCourseDTO.getCharge())) {
-            throw new RuntimeException("收费规则为空");
+            throw new MyException("收费规则为空");
         }
 
         // 新增课程基本信息
@@ -96,7 +97,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
         courseBaseNew.setStatus("203001");
         courseBaseNew.setCreateDate(LocalDateTime.now());
         if (courseBaseMapper.insert(courseBaseNew) <= 0) {
-            throw new RuntimeException("新增课程基本信息失败");
+            throw new MyException("新增课程基本信息失败");
         };
 
         // 新增课程营销信息
@@ -104,7 +105,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
         BeanUtils.copyProperties(addCourseDTO, courseMarketNew);
         courseMarketNew.setId(courseBaseNew.getId());
         if (upsertCourseMarket(courseMarketNew) <= 0) {
-            throw new RuntimeException("新增课程营销信息失败");
+            throw new MyException("新增课程营销信息失败");
         }
 
         // 返回信息
@@ -121,7 +122,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
         if ("201001".equals(courseMarketNew.getCharge())) {
             Float price = courseMarketNew.getPrice();
             if (price == null || price <= 0) {
-                throw new RuntimeException("价格不合法");
+                throw new MyException("价格不合法");
             }
         }
         if ("201000".equals(courseMarketNew.getCharge())) {
