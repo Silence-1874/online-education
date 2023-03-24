@@ -37,7 +37,9 @@ public class CourseBaseInfoController {
     @ApiOperation("新增课程基础信息")
     @PostMapping("/course")
     public CourseBaseInfoDTO createCourseBase(@RequestBody AddCourseDTO addCourseDTO) {
-        return null;
+        // 暂时硬编码
+        Long companyId = 1232141425L;
+        return courseBaseInfoService.createCourseBase(companyId, addCourseDTO);
     }
 
 }

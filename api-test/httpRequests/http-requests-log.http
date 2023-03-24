@@ -104,3 +104,31 @@ GET http://localhost:63040/course-category/tree-nodes
 
 ###
 
+<> 2023-03-24T084548.200.json
+
+###
+
+GET http://localhost:63040/content/course-category/tree-nodes
+
+<> 2023-03-24T084031.404.json
+
+###
+
+GET http://localhost:63040/content/course-category/tree-nodes
+
+<> 2023-03-24T083811.404.json
+
+###
+
+GET http://localhost:63040/course-category/tree-nodes
+
+<> 2023-03-24T083736.404.html
+
+###
+
+GET http://localhost:63040/course-category/tree-nodes
+
+<> 2023-03-24T083639.404.html
+
+###
+

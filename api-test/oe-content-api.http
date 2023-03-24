@@ -22,3 +22,31 @@ GET {{content_host}}/content/course-category/tree-nodes
 <> 2023-03-24T083811.404.json
 <> 2023-03-24T083736.404.html
 <> 2023-03-24T083639.404.html
+
+### 添加课程基本信息
+POST {{content_host}}/content/course
+Content-Type: application/json
+
+{
+  "name": "name",
+  "tags": "tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "description",
+  "users": "users",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "qq",
+  "wechat": "wechat",
+  "phone": "phone",
+  "validDays": 365,
+  "teachmode": "200002"
+}
+
+<> 2023-03-24T150732.200.json
+<> 2023-03-24T150500.200.json
+<> 2023-03-24T145605.404.html
+<> 2023-03-24T145446.404.html
