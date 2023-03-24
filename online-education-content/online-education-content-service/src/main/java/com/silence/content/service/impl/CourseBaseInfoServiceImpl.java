@@ -124,6 +124,10 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
                 throw new RuntimeException("价格不合法");
             }
         }
+        if ("201000".equals(courseMarketNew.getCharge())) {
+            courseMarketNew.setPrice(0f);
+            courseMarketNew.setOriginalPrice(0f);
+        }
         // 添加或修改营销信息
         CourseMarket courseMarket = courseMarketMapper.selectById(courseMarketNew.getId());
         if (courseMarket == null) {
