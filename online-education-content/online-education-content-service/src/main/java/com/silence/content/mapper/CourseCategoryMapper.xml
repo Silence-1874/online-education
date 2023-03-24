@@ -18,4 +18,15 @@
         id, name, label, parentid, is_show, orderby, is_leaf
     </sql>
 
+    <select id="selectTreeNodes"
+            resultType="com.silence.content.model.dto.CourseCategoryTreeDTO"
+            parameterType="string">
+        WITH RECURSIVE parent AS (
+            SELECT root.* FROM course_category AS root WHERE root.id = #{id}
+            UNION ALL
+            SELECT child.* FROM course_category AS child INNER JOIN parent ON child.parentid = parent.id
+        )
+        SELECT * FROM parent ORDER BY parent.id, parent.orderby
+    </select>
+
 </mapper>
