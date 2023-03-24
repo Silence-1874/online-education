@@ -2,6 +2,8 @@ package com.silence.content.api;
 
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
+import com.silence.content.model.dto.AddCourseDTO;
+import com.silence.content.model.dto.CourseBaseInfoDTO;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.po.CourseBase;
 import com.silence.content.service.CourseBaseInfoService;
@@ -30,6 +32,12 @@ public class CourseBaseInfoController {
                                        @RequestBody(required = false) QueryCourseParamsDTO queryCourseParams) {
         PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, queryCourseParams);
         return courseBasePageResult;
+    }
+
+    @ApiOperation("新增课程基础信息")
+    @PostMapping("/course")
+    public CourseBaseInfoDTO createCourseBase(@RequestBody AddCourseDTO addCourseDTO) {
+        return null;
     }
 
 }
