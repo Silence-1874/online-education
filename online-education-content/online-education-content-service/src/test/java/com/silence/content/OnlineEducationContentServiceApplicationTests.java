@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
 import com.silence.content.mapper.CourseBaseMapper;
+import com.silence.content.model.dto.CourseCategoryTreeDTO;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.po.CourseBase;
 import com.silence.content.service.CourseBaseInfoService;
+import com.silence.content.service.CourseCategoryService;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -71,6 +73,15 @@ class OnlineEducationContentServiceApplicationTests {
 
         PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, queryCourseParamsDto);
         System.out.println(courseBasePageResult);
+    }
+
+    @Autowired
+    private CourseCategoryService courseCategoryService;
+
+    @Test
+    void testCategoryTreeNode() {
+        List<CourseCategoryTreeDTO> list = courseCategoryService.queryTreeNodes("1");
+        System.out.println(list);
     }
 
 }
