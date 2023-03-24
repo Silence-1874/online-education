@@ -3,6 +3,8 @@ package com.silence.content.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
+import com.silence.content.model.dto.AddCourseDTO;
+import com.silence.content.model.dto.CourseBaseInfoDTO;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.po.CourseBase;
 
@@ -22,5 +24,12 @@ public interface CourseBaseInfoService extends IService<CourseBase> {
      * @Date 2023/3/20
      */
     PageResult<CourseBase> queryCourseBaseList(PageParams pageParams, QueryCourseParamsDTO queryCourseParams);
+
+    /**
+     * @Author silence
+     * @Description 添加课程基本信息
+     * @Date 2023/3/24
+     */
+    CourseBaseInfoDTO createCourseBase(Long companyId, AddCourseDTO addCourseDTO);
 
 }
