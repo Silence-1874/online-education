@@ -13,3 +13,12 @@ Content-Type: application/json
 <> 2023-03-21T091450.200.json
 <> 2023-03-21T091430.404.html
 <> 2023-03-21T091340.404.html
+
+### 查询课程分类
+GET {{content_host}}/content/course-category/tree-nodes
+
+<> 2023-03-24T084548.200.json
+<> 2023-03-24T084031.404.json
+<> 2023-03-24T083811.404.json
+<> 2023-03-24T083736.404.html
+<> 2023-03-24T083639.404.html
