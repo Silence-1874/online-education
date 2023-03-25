@@ -1,5 +1,6 @@
 package com.silence.content.api;
 
+import com.silence.base.exception.ValidationGroups;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
 import com.silence.content.model.dto.AddCourseDTO;
@@ -10,6 +11,7 @@ import com.silence.content.service.CourseBaseInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +38,7 @@ public class CourseBaseInfoController {
 
     @ApiOperation("新增课程基础信息")
     @PostMapping("/course")
-    public CourseBaseInfoDTO createCourseBase(@RequestBody AddCourseDTO addCourseDTO) {
+    public CourseBaseInfoDTO createCourseBase(@RequestBody @Validated({ValidationGroups.Insert.class}) AddCourseDTO addCourseDTO) {
         // 暂时硬编码
         Long companyId = 1232141425L;
         return courseBaseInfoService.createCourseBase(companyId, addCourseDTO);
