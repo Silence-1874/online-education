@@ -12,6 +12,7 @@ import com.silence.content.mapper.CourseMarketMapper;
 import com.silence.content.model.dto.AddCourseDTO;
 import com.silence.content.model.dto.CourseBaseInfoDTO;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
+import com.silence.content.model.dto.UpdateCourseDTO;
 import com.silence.content.model.po.CourseBase;
 import com.silence.content.model.po.CourseMarket;
 import com.silence.content.service.CourseBaseInfoService;
@@ -136,6 +137,50 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
         } else {
             return courseMarketMapper.updateById(courseMarketNew);
         }
+    }
+
+    @Override
+    public CourseBaseInfoDTO getCourseBaseInfo(Long courseId) {
+        CourseBase courseBase = courseBaseMapper.selectById(courseId);
+        if (courseBase == null) {
+            MyException.cast("课程不存在");
+        }
+        CourseBaseInfoDTO courseBaseInfoDTO = new CourseBaseInfoDTO();
+        BeanUtils.copyProperties(courseBase, courseBaseInfoDTO);
+        CourseMarket courseMarket = courseMarketMapper.selectById(courseId);
+        if (courseMarket != null) {
+            BeanUtils.copyProperties(courseMarket, courseBaseInfoDTO);
+        }
+        courseBaseInfoDTO.setMtName(courseCategoryMapper.selectById(courseBaseInfoDTO.getMt()).getName());
+        courseBaseInfoDTO.setStName(courseCategoryMapper.selectById(courseBaseInfoDTO.getSt()).getName());
+        return courseBaseInfoDTO;
+    }
+
+    @Transactional
+    @Override
+    public CourseBaseInfoDTO updateCourseBaseInfo(Long companyId, UpdateCourseDTO updateCourseDTO) {
+        Long courseId = updateCourseDTO.getId();
+        CourseBase courseBase = courseBaseMapper.selectById(courseId);
+        if (courseBase == null) {
+            MyException.cast("课程不存在");
+        }
+        if (!courseBase.getCompanyId().equals(companyId)) {
+            MyException.cast("无法修改本机构以外的课程");
+        }
+
+        BeanUtils.copyProperties(updateCourseDTO, courseBase);
+        courseBase.setChangeDate(LocalDateTime.now());
+        if (courseBaseMapper.updateById(courseBase) <= 0) {
+            MyException.cast("修改课程失败");
+        }
+
+        CourseMarket courseMarket = courseMarketMapper.selectById(courseId);
+        BeanUtils.copyProperties(updateCourseDTO, courseMarket);
+        courseBase.setChangeDate(LocalDateTime.now());
+        if (upsertCourseMarket(courseMarket) <= 0) {
+            MyException.cast("修改课程失败");
+        }
+        return this.getCourseBaseInfo(courseId);
     }
 
 }

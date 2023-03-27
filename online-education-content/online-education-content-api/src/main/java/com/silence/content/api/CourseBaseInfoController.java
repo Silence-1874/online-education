@@ -6,15 +6,14 @@ import com.silence.base.model.PageResult;
 import com.silence.content.model.dto.AddCourseDTO;
 import com.silence.content.model.dto.CourseBaseInfoDTO;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
+import com.silence.content.model.dto.UpdateCourseDTO;
 import com.silence.content.model.po.CourseBase;
 import com.silence.content.service.CourseBaseInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author silence
@@ -42,6 +41,20 @@ public class CourseBaseInfoController {
         // 暂时硬编码
         Long companyId = 1232141425L;
         return courseBaseInfoService.createCourseBase(companyId, addCourseDTO);
+    }
+
+    @ApiOperation("根据id查询课程基本信息")
+    @GetMapping(value = "/course/{courseId}")
+    public CourseBaseInfoDTO getCourseBaseById(@PathVariable Long courseId) {
+        return courseBaseInfoService.getCourseBaseInfo(courseId);
+    }
+
+    @ApiOperation("修改课程基本信息")
+    @PutMapping("/course")
+    public CourseBaseInfoDTO updateCourseBase(@RequestBody @Validated(ValidationGroups.Update.class) UpdateCourseDTO updateCourseDTO) {
+        // 暂时硬编码
+        Long companyId = 1232141425L;
+        return courseBaseInfoService.updateCourseBaseInfo(companyId, updateCourseDTO);
     }
 
 }
