@@ -1,108 +1,180 @@
-POST http://localhost:63040/content/course/list?pageNo=1&pageSize=10
+PUT http://localhost:63040/content/course
 Content-Type: application/json
 
 {
-  "auditStatus": "202004",
-  "courseName": "java",
-  "publishStatus": "203002"
+  "id": 121,
+  "name": "111name",
+  "tags": "111tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "111description",
+  "users": "111users11111111",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "111qq",
+  "wechat": "111wechat",
+  "phone": "111phone",
+  "validDays": 365,
+  "teachmode": "200002"
 }
 
-<> 2023-03-21T094008.200.json
+<> 2023-03-27T205859.200.json
 
 ###
 
-POST http://localhost:63040/content/course/list?pageNo=1&pageSize=10
+PUT http://localhost:63040/content/course
 Content-Type: application/json
 
 {
-  "auditStatus": "202004",
-  "courseName": "java",
-  "publishStatus": "203002"
+  "id": 121,
+  "name": "111name",
+  "tags": "111tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "111description",
+  "users": "111users",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "111qq",
+  "wechat": "111wechat",
+  "phone": "111phone",
+  "validDays": 365,
+  "teachmode": "200002"
 }
+
+<> 2023-03-27T205845.500.json
 
 ###
 
-POST http://localhost:63040/content/course/list
-Content-Type: application/json
+GET http://localhost:63040/content/course/125
 
-{
-  "auditStatus": "202004",
-  "courseName": "java",
-  "publishStatus": "203001"
-}
-
-<> 2023-03-21T091457.200.json
+<> 2023-03-27T093753.200.json
 
 ###
 
-POST http://localhost:63040/content/course/list?pageNo=1&pageSize=10
-Content-Type: application/json
+GET http://localhost:63040/content/course/1
 
-{
-  "auditStatus": "202004",
-  "courseName": "java",
-  "publishStatus": "203001"
-}
-
-<> 2023-03-21T091450.200.json
+<> 2023-03-27T093724.200.json
 
 ###
 
-POST http://localhost:63040/course/list?pageNo=1&pageSize=10
-Content-Type: application/json
+GET http://localhost:63040/course/1
 
-{
-  "auditStatus": "202004",
-  "courseName": "java",
-  "publishStatus": "203001"
-}
-
-<> 2023-03-21T091430.404.html
+<> 2023-03-27T093707.404.html
 
 ###
 
-POST http://localhost:63040/course/list
+POST http://localhost:63040/content/course
 Content-Type: application/json
 
 {
-  "auditStatus": "202004",
-  "courseName": "java",
-  "publishStatus": "203001"
+  "name": "name",
+  "tags": "tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "description",
+  "users": "users",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "qq",
+  "wechat": "wechat",
+  "phone": "phone",
+  "validDays": 365,
+  "teachmode": "200002"
 }
 
-<> 2023-03-21T091340.404.html
+<> 2023-03-24T150732.200.json
+
+###
+
+POST http://localhost:63040/content/course
+Content-Type: application/json
+
+{
+  "name": "name",
+  "tags": "tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "description",
+  "users": "users",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "qq",
+  "wechat": "wechat",
+  "phone": "phone",
+  "validDays": 365,
+  "teachmode": "200002"
+}
+
+<> 2023-03-24T150500.200.json
+
+###
+
+POST http://localhost:63040/course
+Content-Type: application/json
+
+{
+  "name": "name",
+  "tags": "tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "description",
+  "users": "users",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "qq",
+  "wechat": "wechat",
+  "phone": "phone",
+  "validDays": 365,
+  "teachmode": "200002"
+}
+
+<> 2023-03-24T145605.404.html
+
+###
+
+POST http://localhost:63040/course
+Content-Type: application/json
+
+{
+  "name": "name",
+  "tags": "tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "description",
+  "users": "users",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "qq",
+  "wechat": "wechat",
+  "phone": "phone",
+  "validDays": 365,
+  "teachmode": "200002",
+}
+
+<> 2023-03-24T145446.404.html
 
 ###
 
 GET http://localhost:63040/content/course-category/tree-nodes
-
-<> 2023-03-24T084548.200.json
-
-###
-
-GET http://localhost:63040/content/course-category/tree-nodes
-
-<> 2023-03-24T084031.404.json
-
-###
-
-GET http://localhost:63040/content/course-category/tree-nodes
-
-<> 2023-03-24T083811.404.json
-
-###
-
-GET http://localhost:63040/course-category/tree-nodes
-
-<> 2023-03-24T083736.404.html
-
-###
-
-GET http://localhost:63040/course-category/tree-nodes
-
-<> 2023-03-24T083639.404.html
-
-###
 
 <> 2023-03-24T084548.200.json
 

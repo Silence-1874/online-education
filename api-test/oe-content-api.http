@@ -50,3 +50,36 @@ Content-Type: application/json
 <> 2023-03-24T150500.200.json
 <> 2023-03-24T145605.404.html
 <> 2023-03-24T145446.404.html
+### 根据id查询课程基本信息
+GET {{content_host}}/content/course/125
+
+<> 2023-03-27T093753.200.json
+<> 2023-03-27T093724.200.json
+<> 2023-03-27T093707.404.html
+
+### 修改课程基本信息
+PUT {{content_host}}/content/course
+Content-Type: application/json
+
+{
+  "id": 121,
+  "name": "111name",
+  "tags": "111tag",
+  "mt": "1-1",
+  "st": "1-1-1",
+  "grade": "204001",
+  "description": "111description",
+  "users": "111users11111111",
+  "pic": "",
+  "charge": "201000",
+  "originalPrice": 0,
+  "price": 0,
+  "qq": "111qq",
+  "wechat": "111wechat",
+  "phone": "111phone",
+  "validDays": 365,
+  "teachmode": "200002"
+}
+
+<> 2023-03-27T205859.200.json
+<> 2023-03-27T205845.500.json
