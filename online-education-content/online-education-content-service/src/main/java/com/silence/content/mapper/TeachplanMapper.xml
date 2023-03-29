@@ -27,4 +27,71 @@
         id, pname, parentid, grade, media_type, start_time, end_time, description, timelength, orderby, course_id, course_pub_id, status, is_preview, create_date, change_date
     </sql>
 
+    <resultMap id="treeNodeResultMap" type="com.silence.content.model.dto.TeachplanTreeDTO">
+        <id column="id" property="id"/>
+        <result column="one_pname" property="pname" />
+        <result column="one_parentid" property="parentid" />
+        <result column="one_grade" property="grade" />
+        <result column="one_mediaType" property="mediaType" />
+        <result column="one_stratTime" property="stratTime" />
+        <result column="one_endTime" property="endTime" />
+        <result column="one_orderby" property="orderby" />
+        <result column="one_courseId" property="courseId" />
+        <result column="one_coursePubId" property="coursePubId" />
+        <collection property="childrenTreeNodes" ofType="com.silence.content.model.dto.TeachplanTreeDTO">
+            <id column="two_id" property="id" />
+            <result column="two_pname" property="pname" />
+            <result column="two_parentid" property="parentid" />
+            <result column="two_grade" property="grade" />
+            <result column="two_mediaType" property="mediaType" />
+            <result column="two_startTime" property="startTime" />
+            <result column="two_endTime" property="endTime" />
+            <result column="two_orderby" property="orderby" />
+            <result column="two_courseId" property="courseId" />
+            <result column="two_coursePubId" property="coursePubId" />
+            <association property="teachplanMedia" javaType="com.silence.content.model.po.TeachplanMedia">
+                <result column="teachplanMeidaId" property="id" />
+                <result column="mediaFileName" property="mediaFileName" />
+                <result column="mediaId" property="mediaId" />
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="selectTreeNodes"
+            resultMap="treeNodeResultMap"
+            parameterType="long">
+        SELECT one.id AS one_id,
+               one.pname AS one_pname,
+               one.parentid AS one_parentid,
+               one.grade AS one_grade,
+               one.media_type AS one_mediaType,
+               one.start_time AS one_startTime,
+               one.end_time AS one_endTime,
+               one.orderby AS one_orderby,
+               one.course_id AS one_courseId,
+               one.course_pub_id AS one_coursePubId,
+               two.id AS two_id,
+               two.pname AS two_pname,
+               two.parentid AS two_parentid,
+               two.grade AS two_grade,
+               two.media_type AS two_mediaType,
+               two.start_time AS two_startTime,
+               two.end_time AS two_endTime,
+               two.orderby AS two_orderby,
+               two.course_id AS two_courseId,
+               two.course_pub_id AS two_coursePubId,
+               m.media_id AS mediaId,
+               m.media_fileName AS mediaFileName,
+               m.teachplan_id AS teachplanMidiaId
+        FROM teachplan AS one
+                 INNER JOIN teachplan AS two
+                            ON two.parentid = one.id
+                 LEFT JOIN teachplan_media AS m
+                           ON m.teachplan_id = two.id
+        WHERE one.parentid = 0
+          AND one.course_id = #{id}
+        ORDER BY one.orderby, two.orderby
+    </select>
+
+
 </mapper>
