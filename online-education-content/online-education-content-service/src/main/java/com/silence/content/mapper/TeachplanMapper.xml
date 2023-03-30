@@ -51,7 +51,7 @@
             <result column="two_coursePubId" property="coursePubId" />
             <association property="teachplanMedia" javaType="com.silence.content.model.po.TeachplanMedia">
                 <result column="teachplanMeidaId" property="id" />
-                <result column="mediaFileName" property="mediaFileName" />
+                <result column="mediaFilename" property="mediaFilename" />
                 <result column="mediaId" property="mediaId" />
             </association>
         </collection>
@@ -81,7 +81,7 @@
                two.course_id AS two_courseId,
                two.course_pub_id AS two_coursePubId,
                m.media_id AS mediaId,
-               m.media_fileName AS mediaFileName,
+               m.media_filename AS mediaFilename,
                m.teachplan_id AS teachplanMidiaId
         FROM teachplan AS one
                  INNER JOIN teachplan AS two
