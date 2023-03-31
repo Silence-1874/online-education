@@ -28,12 +28,12 @@
     </sql>
 
     <resultMap id="treeNodeResultMap" type="com.silence.content.model.dto.TeachplanTreeDTO">
-        <id column="id" property="id"/>
+        <id column="one_id" property="id"/>
         <result column="one_pname" property="pname" />
         <result column="one_parentid" property="parentid" />
         <result column="one_grade" property="grade" />
         <result column="one_mediaType" property="mediaType" />
-        <result column="one_stratTime" property="stratTime" />
+        <result column="one_startTime" property="startTime" />
         <result column="one_endTime" property="endTime" />
         <result column="one_orderby" property="orderby" />
         <result column="one_courseId" property="courseId" />
@@ -50,7 +50,7 @@
             <result column="two_courseId" property="courseId" />
             <result column="two_coursePubId" property="coursePubId" />
             <association property="teachplanMedia" javaType="com.silence.content.model.po.TeachplanMedia">
-                <result column="teachplanMeidaId" property="id" />
+                <result column="teachplanMediaId" property="id" />
                 <result column="mediaFilename" property="mediaFilename" />
                 <result column="mediaId" property="mediaId" />
                 <result column="two_id" property="teachplanId" />
@@ -83,9 +83,9 @@
                two.orderby AS two_orderby,
                two.course_id AS two_courseId,
                two.course_pub_id AS two_coursePubId,
-               m.media_id AS mediaId,
                m.media_filename AS mediaFilename,
-               m.teachplan_id AS teachplanMidiaId
+               m.media_id AS mediaId,
+               m.id AS teachplanMediaId
         FROM teachplan AS one
                  INNER JOIN teachplan AS two
                             ON two.parentid = one.id
