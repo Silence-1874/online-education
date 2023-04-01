@@ -2,14 +2,18 @@ package com.silence.content.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.silence.base.exception.MyException;
 import com.silence.content.mapper.TeachplanMapper;
+import com.silence.content.mapper.TeachplanMediaMapper;
 import com.silence.content.model.dto.TeachplanTreeDTO;
 import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.model.po.Teachplan;
+import com.silence.content.model.po.TeachplanMedia;
 import com.silence.content.service.TeachplanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,6 +31,9 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
 
     @Resource
     private TeachplanMapper teachplanMapper;
+
+    @Resource
+    private TeachplanMediaMapper teachplanMediaMapper;
 
     @Override
     public List<TeachplanTreeDTO> findTeachplanTree(long courseId) {
@@ -49,6 +56,32 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
             teachplan.setOrderby(count);
             teachplanMapper.insert(teachplan);
         }
+    }
+
+    @Transactional
+    @Override
+    public void deleteTeachplan(long courseId) {
+        Teachplan teachplan = teachplanMapper.selectById(courseId);
+        Long id = teachplan.getId();
+        // 删除章
+        if (teachplan.getGrade() == 1) {
+            // 查找章下的小节
+            LambdaQueryWrapper<Teachplan> queryWrapper = new LambdaQueryWrapper<>();
+            Integer cnt = teachplanMapper.selectCount(queryWrapper.eq(Teachplan::getParentid, id));
+            // 若章下还有小节，不能直接删除章
+            if (cnt != 0) {
+                MyException.cast("该章下还有小节，无法操作");
+            // 章下无小节，删除该章
+            } else {
+                teachplanMapper.deleteById(id);
+            }
+        // 删除小节及关联的媒资文件
+        } else if (teachplan.getGrade() == 2) {
+            LambdaQueryWrapper<TeachplanMedia> queryWrapper = new LambdaQueryWrapper<>();
+            teachplanMediaMapper.delete(queryWrapper.eq(TeachplanMedia::getTeachplanId, id));
+            teachplanMapper.deleteById(id);
+        }
+
     }
 
     private int getTeachplanCount(long courseId, long parentId) {

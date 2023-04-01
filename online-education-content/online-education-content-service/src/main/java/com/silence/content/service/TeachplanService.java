@@ -31,4 +31,11 @@ public interface TeachplanService extends IService<Teachplan> {
      */
     void upsertTeachplan(UpsertTeachplanDTO upsertTeachplanDTO);
 
+    /**
+     * @Author silence
+     * @Description 删除课程计划
+     * @Date 2023/4/1
+     */
+    void deleteTeachplan(long courseId);
+
 }
