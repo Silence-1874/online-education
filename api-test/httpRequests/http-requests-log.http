@@ -1,3 +1,197 @@
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 117,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "1",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 0,
+  "pname" : "修改111名",
+  "startTime" : null,
+  "status" : null,
+  "id" : 297
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 117,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "1",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 0,
+  "pname" : "修改名111",
+  "startTime" : null,
+  "status" : null,
+  "id" : 297
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 117,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "1",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 0,
+  "pname" : "修改名111",
+  "startTime" : null,
+  "status" : null,
+  "teachPlanId" : 240
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 117,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "1",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 0,
+  "pname" : "修改名",
+  "startTime" : null,
+  "status" : null,
+  "teachPlanId" : 297
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 117,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "1",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 0,
+  "pname" : "修改名称",
+  "startTime" : null,
+  "status" : null,
+  "teachPlanId" : 240
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 117,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "1",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 0,
+  "pname" : "修改章节名称",
+  "startTime" : null,
+  "status" : null,
+  "teachPlanId" : 291
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 22,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "2",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 237,
+  "pname" : "第1节修改名称",
+  "startTime" : null,
+  "status" : null,
+  "teachPlanId" : 240
+}
+
+###
+
+POST http://localhost:63040/content/teachplan
+Content-Type: application/json
+
+{
+  "changeDate" : null,
+  "courseId" : 22,
+  "cousePubId" : null,
+  "createDate" : null,
+  "ctlBarShow" : false,
+  "ctlEditTitle" : true,
+  "endTime" : null,
+  "grade" : "2",
+  "isPreview" : "1",
+  "mediaType" : "",
+  "orderby" : 1,
+  "parentid" : 237,
+  "pname" : "第1节修改名称",
+  "startTime" : null,
+  "status" : null,
+  "teachPlanId" : 240
+}
+
+<> 2023-04-01T163204.500.json
+
+###
+
 GET http://localhost:63040/content/teachplan/25/tree-nodes
 
 <> 2023-03-30T085502.200.json
