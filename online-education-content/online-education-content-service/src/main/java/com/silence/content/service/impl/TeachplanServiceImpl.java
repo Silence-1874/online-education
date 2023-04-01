@@ -40,6 +40,7 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
         return teachplanMapper.selectTreeNodes(courseId);
     }
 
+    @Transactional
     @Override
     public void upsertTeachplan(UpsertTeachplanDTO upsertTeachplanDTO) {
         Long id = upsertTeachplanDTO.getId();
