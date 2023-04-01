@@ -2,6 +2,7 @@ package com.silence.content.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.silence.base.exception.CommonError;
 import com.silence.base.exception.MyException;
 import com.silence.content.mapper.TeachplanMapper;
 import com.silence.content.mapper.TeachplanMediaMapper;
@@ -90,6 +91,45 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
         queryWrapper.eq(Teachplan::getCourseId, courseId);
         queryWrapper.eq(Teachplan::getParentid, parentId);
         return teachplanMapper.selectCount(queryWrapper);
+    }
+
+    @Transactional
+    @Override
+    public void moveOrder(int direction, long id) {
+        Teachplan curTeachplan = teachplanMapper.selectById(id);
+        long courseId = curTeachplan.getCourseId();
+        long parentId = curTeachplan.getParentid();
+        int curOrder = curTeachplan.getOrderby();
+        int total = getTeachplanCount(courseId, parentId);
+        // 下移
+        if (direction == -1) {
+            if (curOrder == total) {
+                MyException.cast("已经是最后一个了");
+            }
+            LambdaQueryWrapper<Teachplan> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(Teachplan::getParentid, parentId);
+            queryWrapper.eq(Teachplan::getOrderby, curOrder + 1);
+            Teachplan nextTeachplan = teachplanMapper.selectOne(queryWrapper);
+            nextTeachplan.setOrderby(curOrder);
+            curTeachplan.setOrderby(curOrder + 1);
+            teachplanMapper.updateById(curTeachplan);
+            teachplanMapper.updateById(nextTeachplan);
+        // 上移
+        } else if (direction == 1) {
+            if (curOrder == 1) {
+                MyException.cast("已经是第一个了");
+            }
+            LambdaQueryWrapper<Teachplan> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(Teachplan::getParentid, parentId);
+            queryWrapper.eq(Teachplan::getOrderby, curOrder - 1);
+            Teachplan prevTeachplan = teachplanMapper.selectOne(queryWrapper);
+            prevTeachplan.setOrderby(curOrder);
+            curTeachplan.setOrderby(curOrder - 1);
+            teachplanMapper.updateById(prevTeachplan);
+            teachplanMapper.updateById(curTeachplan);
+        } else {
+            MyException.cast(CommonError.PARAMS_ERROR);
+        }
     }
 
 }

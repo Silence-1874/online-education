@@ -38,4 +38,11 @@ public interface TeachplanService extends IService<Teachplan> {
      */
     void deleteTeachplan(long courseId);
 
+    /**
+     * @Author silence
+     * @Description 移动计划顺序，direction为-1时下移，为1时上移
+     * @Date 2023/4/1
+     */
+    void moveOrder(int direction, long id);
+
 }

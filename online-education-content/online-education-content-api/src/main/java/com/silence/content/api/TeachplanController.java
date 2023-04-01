@@ -43,4 +43,16 @@ public class TeachplanController {
         teachplanService.deleteTeachplan(courseId);
     }
 
+    @ApiOperation("移动计划顺序")
+    @PostMapping("/teachplan/{direction}/{id}")
+    public void moveOrder(@PathVariable String direction, @PathVariable Long id) {
+        int dir = 0;
+        if ("movedown".equals(direction)) {
+            dir = -1;
+        } else if ("moveup".equals(direction)) {
+            dir = 1;
+        }
+        teachplanService.moveOrder(dir, id);
+    }
+
 }
