@@ -1,14 +1,13 @@
 package com.silence.content.api;
 
 import com.silence.content.model.dto.TeachplanTreeDTO;
+import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.service.TeachplanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +28,12 @@ public class TeachplanController {
     @GetMapping("teachplan/{courseId}/tree-nodes")
     public List<TeachplanTreeDTO> getTreeNodes(@PathVariable Long courseId) {
         return teachplanService.findTeachplanTree(courseId);
+    }
+
+    @ApiOperation("添加或修改课程计划")
+    @PostMapping("/teachplan")
+    public void upsertTreeNode(@RequestBody UpsertTeachplanDTO teachplan) {
+        teachplanService.upsertTeachplan(teachplan);
     }
 
 }

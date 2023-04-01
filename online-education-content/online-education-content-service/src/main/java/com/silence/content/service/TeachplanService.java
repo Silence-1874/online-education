@@ -2,6 +2,7 @@ package com.silence.content.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.silence.content.model.dto.TeachplanTreeDTO;
+import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.model.po.Teachplan;
 
 import java.util.List;
@@ -22,5 +23,12 @@ public interface TeachplanService extends IService<Teachplan> {
      * @Date 2023/3/30
      */
     List<TeachplanTreeDTO> findTeachplanTree(long courseId);
+
+    /**
+     * @Author silence
+     * @Description 添加或修改课程计划
+     * @Date 2023/4/1
+     */
+    void upsertTeachplan(UpsertTeachplanDTO upsertTeachplanDTO);
 
 }
