@@ -87,7 +87,7 @@
                m.media_id AS mediaId,
                m.id AS teachplanMediaId
         FROM teachplan AS one
-                 INNER JOIN teachplan AS two
+                 LEFT JOIN teachplan AS two
                             ON two.parentid = one.id
                  LEFT JOIN teachplan_media AS m
                            ON m.teachplan_id = two.id
