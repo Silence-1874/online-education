@@ -58,4 +58,16 @@ public class CourseTeacherServiceImpl extends ServiceImpl<CourseTeacherMapper, C
         return courseTeacher;
     }
 
+    @Transactional
+    @Override
+    public void removeCourseTeacher(Long companyId, Long id) {
+        // 查找课程对应的机构
+        CourseTeacher courseTeacher = courseTeacherMapper.selectById(id);
+        CourseBase courseBase = courseBaseMapper.selectById(courseTeacher.getCourseId());
+        if (!companyId.equals(courseBase.getCompanyId())) {
+            MyException.cast("只能删除本机构的教师");
+        }
+        courseTeacherMapper.deleteById(id);
+    }
+
 }

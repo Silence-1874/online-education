@@ -35,4 +35,12 @@ public class CourseTeacherController {
         return courseTeacherService.upsertCourseTeacher(companyId, courseTeacher);
     }
 
+    @ApiOperation("删除教师")
+    @DeleteMapping("/courseTeacher/course/{courseId}/{id}")
+    public void removeTeacher(@PathVariable Long courseId, @PathVariable Long id) {
+        // 暂时硬编码
+        Long companyId = 1232141425L;
+        courseTeacherService.removeCourseTeacher(companyId, id);
+    }
+
 }

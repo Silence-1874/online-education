@@ -29,4 +29,11 @@ public interface CourseTeacherService extends IService<CourseTeacher> {
      */
     CourseTeacher upsertCourseTeacher(Long companyId, CourseTeacher courseTeacher);
 
+    /**
+     * @Author silence
+     * @Description 删除教师信息
+     * @Date 2023/4/2
+     */
+    void removeCourseTeacher(Long companyId, Long id);
+
 }
