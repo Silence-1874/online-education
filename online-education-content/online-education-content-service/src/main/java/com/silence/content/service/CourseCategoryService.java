@@ -21,6 +21,6 @@ public interface CourseCategoryService extends IService<CourseCategory> {
      * @Description 查询某分类下的所有结点（不包括自身），并调整好结构
      * @Date 2023/3/23
      */
-    List<CourseCategoryTreeDTO> queryTreeNodes(String id);
+    List<CourseCategoryTreeDTO> listTreeNode(String id);
 
 }

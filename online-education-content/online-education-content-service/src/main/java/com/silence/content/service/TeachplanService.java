@@ -22,7 +22,7 @@ public interface TeachplanService extends IService<Teachplan> {
      * @Description 查询教学计划树
      * @Date 2023/3/30
      */
-    List<TeachplanTreeDTO> findTeachplanTree(long courseId);
+    List<TeachplanTreeDTO> listTreeNode(long courseId);
 
     /**
      * @Author silence
@@ -36,7 +36,7 @@ public interface TeachplanService extends IService<Teachplan> {
      * @Description 删除课程计划
      * @Date 2023/4/1
      */
-    void deleteTeachplan(long courseId);
+    void removeTreeNode(long courseId);
 
     /**
      * @Author silence

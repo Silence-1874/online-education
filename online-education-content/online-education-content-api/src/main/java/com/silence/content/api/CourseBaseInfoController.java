@@ -29,24 +29,23 @@ public class CourseBaseInfoController {
 
     @ApiOperation("课程查询接口")
     @PostMapping(value = "/course/list")
-    public PageResult<CourseBase> list(PageParams pageParams,
+    public PageResult<CourseBase> listCourseBase(PageParams pageParams,
                                        @RequestBody(required = false) QueryCourseParamsDTO queryCourseParams) {
-        PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, queryCourseParams);
-        return courseBasePageResult;
+        return courseBaseInfoService.listCourseBase(pageParams, queryCourseParams);
     }
 
     @ApiOperation("新增课程基础信息")
     @PostMapping("/course")
-    public CourseBaseInfoDTO createCourseBase(@RequestBody @Validated({ValidationGroups.Insert.class}) AddCourseDTO addCourseDTO) {
+    public CourseBaseInfoDTO saveCourseBase(@RequestBody @Validated({ValidationGroups.Insert.class}) AddCourseDTO addCourseDTO) {
         // 暂时硬编码
         Long companyId = 1232141425L;
-        return courseBaseInfoService.createCourseBase(companyId, addCourseDTO);
+        return courseBaseInfoService.saveCourseBase(companyId, addCourseDTO);
     }
 
     @ApiOperation("根据id查询课程基本信息")
     @GetMapping(value = "/course/{courseId}")
     public CourseBaseInfoDTO getCourseBaseById(@PathVariable Long courseId) {
-        return courseBaseInfoService.getCourseBaseInfo(courseId);
+        return courseBaseInfoService.getCourseBaseById(courseId);
     }
 
     @ApiOperation("修改课程基本信息")
@@ -54,13 +53,13 @@ public class CourseBaseInfoController {
     public CourseBaseInfoDTO updateCourseBase(@RequestBody @Validated(ValidationGroups.Update.class) UpdateCourseDTO updateCourseDTO) {
         // 暂时硬编码
         Long companyId = 1232141425L;
-        return courseBaseInfoService.updateCourseBaseInfo(companyId, updateCourseDTO);
+        return courseBaseInfoService.updateCourseBase(companyId, updateCourseDTO);
     }
 
     @ApiOperation("删除课程")
     @DeleteMapping("/course/{courseId}")
-    public void removeCourse(@PathVariable Long courseId) {
-        courseBaseInfoService.removeCourse(courseId);
+    public void removeCourseById(@PathVariable Long courseId) {
+        courseBaseInfoService.removeCourseById(courseId);
     }
 
 }

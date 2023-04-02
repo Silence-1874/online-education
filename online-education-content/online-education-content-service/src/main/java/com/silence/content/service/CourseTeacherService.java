@@ -20,20 +20,20 @@ public interface CourseTeacherService extends IService<CourseTeacher> {
      * @Description 查询教师列表
      * @Date 2023/4/2
      */
-    List<CourseTeacher> queryCourseTeacherList(long courseId);
+    List<CourseTeacher> listTeacher(long courseId);
 
     /**
      * @Author silence
      * @Description 添加或修改教师信息
      * @Date 2023/4/2
      */
-    CourseTeacher upsertCourseTeacher(Long companyId, CourseTeacher courseTeacher);
+    CourseTeacher upsertTeacher(Long companyId, CourseTeacher courseTeacher);
 
     /**
      * @Author silence
      * @Description 删除教师信息
      * @Date 2023/4/2
      */
-    void removeCourseTeacher(Long companyId, Long id);
+    void removeTeacher(Long companyId, Long id);
 
 }

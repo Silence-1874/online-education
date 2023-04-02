@@ -24,34 +24,34 @@ public interface CourseBaseInfoService extends IService<CourseBase> {
      * @Description 课程查询
      * @Date 2023/3/20
      */
-    PageResult<CourseBase> queryCourseBaseList(PageParams pageParams, QueryCourseParamsDTO queryCourseParams);
+    PageResult<CourseBase> listCourseBase(PageParams pageParams, QueryCourseParamsDTO queryCourseParams);
 
     /**
      * @Author silence
      * @Description 添加课程基本信息
      * @Date 2023/3/24
      */
-    CourseBaseInfoDTO createCourseBase(Long companyId, AddCourseDTO addCourseDTO);
+    CourseBaseInfoDTO saveCourseBase(Long companyId, AddCourseDTO addCourseDTO);
 
     /**
      * @Author silence
      * @Description 根据id查询课程基本信息
      * @Date 2023/3/27
      */
-    CourseBaseInfoDTO getCourseBaseInfo(Long courseId);
+    CourseBaseInfoDTO getCourseBaseById(Long courseId);
 
     /**
      * @Author silence
      * @Description 修改课程基本信息
      * @Date 2023/3/27
      */
-    CourseBaseInfoDTO updateCourseBaseInfo(Long companyId, UpdateCourseDTO updateCourseDTO);
+    CourseBaseInfoDTO updateCourseBase(Long companyId, UpdateCourseDTO updateCourseDTO);
 
     /**
      * @Author silence
      * @Description 删除课程
      * @Date 2023/4/2
      */
-    void removeCourse(Long courseId);
+    void removeCourseById(Long courseId);
 
 }

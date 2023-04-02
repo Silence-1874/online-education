@@ -23,8 +23,8 @@ public class CourseTeacherController {
 
     @ApiOperation("查询教师")
     @GetMapping("/courseTeacher/list/{courseId}")
-    public List<CourseTeacher> list(@PathVariable Long courseId) {
-        return courseTeacherService.queryCourseTeacherList(courseId);
+    public List<CourseTeacher> listTeacher(@PathVariable Long courseId) {
+        return courseTeacherService.listTeacher(courseId);
     }
 
     @ApiOperation("添加或修改教师")
@@ -32,7 +32,7 @@ public class CourseTeacherController {
     public CourseTeacher upsertTeacher(@RequestBody CourseTeacher courseTeacher) {
         // 暂时硬编码
         Long companyId = 1232141425L;
-        return courseTeacherService.upsertCourseTeacher(companyId, courseTeacher);
+        return courseTeacherService.upsertTeacher(companyId, courseTeacher);
     }
 
     @ApiOperation("删除教师")
@@ -40,7 +40,7 @@ public class CourseTeacherController {
     public void removeTeacher(@PathVariable Long courseId, @PathVariable Long id) {
         // 暂时硬编码
         Long companyId = 1232141425L;
-        courseTeacherService.removeCourseTeacher(companyId, id);
+        courseTeacherService.removeTeacher(companyId, id);
     }
 
 }

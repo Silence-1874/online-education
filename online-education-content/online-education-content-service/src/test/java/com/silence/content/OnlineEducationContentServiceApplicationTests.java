@@ -71,7 +71,7 @@ class OnlineEducationContentServiceApplicationTests {
         pageParams.setPageNo(1L);
         pageParams.setPageSize(3L);
 
-        PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, queryCourseParamsDto);
+        PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.listCourseBase(pageParams, queryCourseParamsDto);
         System.out.println(courseBasePageResult);
     }
 
@@ -80,7 +80,7 @@ class OnlineEducationContentServiceApplicationTests {
 
     @Test
     void testCategoryTreeNode() {
-        List<CourseCategoryTreeDTO> list = courseCategoryService.queryTreeNodes("1");
+        List<CourseCategoryTreeDTO> list = courseCategoryService.listTreeNode("1");
         System.out.println(list);
     }
 

@@ -33,7 +33,7 @@ public class CourseTeacherServiceImpl extends ServiceImpl<CourseTeacherMapper, C
     private CourseBaseMapper courseBaseMapper;
 
     @Override
-    public List<CourseTeacher> queryCourseTeacherList(long courseId) {
+    public List<CourseTeacher> listTeacher(long courseId) {
         LambdaQueryWrapper<CourseTeacher> queryWrapper = new  LambdaQueryWrapper<>();
         queryWrapper.eq(CourseTeacher::getCourseId, courseId);
         return courseTeacherMapper.selectList(queryWrapper);
@@ -41,7 +41,7 @@ public class CourseTeacherServiceImpl extends ServiceImpl<CourseTeacherMapper, C
 
     @Transactional
     @Override
-    public CourseTeacher upsertCourseTeacher(Long companyId, CourseTeacher courseTeacher) {
+    public CourseTeacher upsertTeacher(Long companyId, CourseTeacher courseTeacher) {
         // 查找课程对应的机构
         CourseBase courseBase = courseBaseMapper.selectById(courseTeacher.getCourseId());
         if (!companyId.equals(courseBase.getCompanyId())) {
@@ -60,7 +60,7 @@ public class CourseTeacherServiceImpl extends ServiceImpl<CourseTeacherMapper, C
 
     @Transactional
     @Override
-    public void removeCourseTeacher(Long companyId, Long id) {
+    public void removeTeacher(Long companyId, Long id) {
         // 查找课程对应的机构
         CourseTeacher courseTeacher = courseTeacherMapper.selectById(id);
         CourseBase courseBase = courseBaseMapper.selectById(courseTeacher.getCourseId());

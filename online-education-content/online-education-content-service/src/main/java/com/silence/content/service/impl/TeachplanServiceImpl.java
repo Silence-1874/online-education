@@ -37,7 +37,7 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
     private TeachplanMediaMapper teachplanMediaMapper;
 
     @Override
-    public List<TeachplanTreeDTO> findTeachplanTree(long courseId) {
+    public List<TeachplanTreeDTO> listTreeNode(long courseId) {
         return teachplanMapper.selectTreeNodes(courseId);
     }
 
@@ -62,7 +62,7 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
 
     @Transactional
     @Override
-    public void deleteTeachplan(long courseId) {
+    public void removeTreeNode(long courseId) {
         Teachplan teachplan = teachplanMapper.selectById(courseId);
         Long id = teachplan.getId();
         // 删除章

@@ -26,8 +26,8 @@ public class TeachplanController {
     @ApiOperation("查询课程计划树形结构")
     @ApiImplicitParam(value = "courseId",name = "课程Id",required = true,dataType = "Long",paramType = "path")
     @GetMapping("teachplan/{courseId}/tree-nodes")
-    public List<TeachplanTreeDTO> getTreeNodes(@PathVariable Long courseId) {
-        return teachplanService.findTeachplanTree(courseId);
+    public List<TeachplanTreeDTO> listTreeNode(@PathVariable Long courseId) {
+        return teachplanService.listTreeNode(courseId);
     }
 
     @ApiOperation("添加或修改课程计划")
@@ -40,7 +40,7 @@ public class TeachplanController {
     @ApiImplicitParam(value = "courseId",name = "课程Id",required = true,dataType = "Long",paramType = "path")
     @DeleteMapping("/teachplan/{courseId}")
     public void removeTreeNode(@PathVariable Long courseId) {
-        teachplanService.deleteTeachplan(courseId);
+        teachplanService.removeTreeNode(courseId);
     }
 
     @ApiOperation("移动计划顺序")

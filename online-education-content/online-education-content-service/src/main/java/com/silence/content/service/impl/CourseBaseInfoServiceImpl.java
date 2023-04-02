@@ -53,7 +53,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
     private TeachplanMediaMapper teachplanMediaMapper;
 
     @Override
-    public PageResult<CourseBase> queryCourseBaseList(PageParams pageParams, QueryCourseParamsDTO queryCourseParams) {
+    public PageResult<CourseBase> listCourseBase(PageParams pageParams, QueryCourseParamsDTO queryCourseParams) {
         // 构建查询条件对象
         LambdaQueryWrapper<CourseBase> queryWrapper = new LambdaQueryWrapper<>();
         // 构建查询条件
@@ -75,7 +75,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
 
     @Transactional
     @Override
-    public CourseBaseInfoDTO createCourseBase(Long companyId, AddCourseDTO addCourseDTO) {
+    public CourseBaseInfoDTO saveCourseBase(Long companyId, AddCourseDTO addCourseDTO) {
         // 参数合法性校验
         if (StringUtils.isBlank(addCourseDTO.getName())) {
             throw new MyException("课程名称为空");
@@ -146,7 +146,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
     }
 
     @Override
-    public CourseBaseInfoDTO getCourseBaseInfo(Long courseId) {
+    public CourseBaseInfoDTO getCourseBaseById(Long courseId) {
         CourseBase courseBase = courseBaseMapper.selectById(courseId);
         if (courseBase == null) {
             MyException.cast("课程不存在");
@@ -164,7 +164,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
 
     @Transactional
     @Override
-    public CourseBaseInfoDTO updateCourseBaseInfo(Long companyId, UpdateCourseDTO updateCourseDTO) {
+    public CourseBaseInfoDTO updateCourseBase(Long companyId, UpdateCourseDTO updateCourseDTO) {
         Long courseId = updateCourseDTO.getId();
         CourseBase courseBase = courseBaseMapper.selectById(courseId);
         if (courseBase == null) {
@@ -186,11 +186,11 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
         if (upsertCourseMarket(courseMarket) <= 0) {
             MyException.cast("修改课程失败");
         }
-        return this.getCourseBaseInfo(courseId);
+        return this.getCourseBaseById(courseId);
     }
 
     @Override
-    public void removeCourse(Long courseId) {
+    public void removeCourseById(Long courseId) {
         CourseBase courseBase = courseBaseMapper.selectById(courseId);
         if (!courseBase.getAuditStatus().equals("202002")) {
             MyException.cast("只能删除未提交审核的课程");

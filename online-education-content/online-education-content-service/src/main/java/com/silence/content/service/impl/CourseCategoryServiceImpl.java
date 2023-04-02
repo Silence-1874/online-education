@@ -29,7 +29,7 @@ public class CourseCategoryServiceImpl extends ServiceImpl<CourseCategoryMapper,
     private CourseCategoryMapper courseCategoryMapper;
 
     @Override
-    public List<CourseCategoryTreeDTO> queryTreeNodes(String id) {
+    public List<CourseCategoryTreeDTO> listTreeNode(String id) {
         // 获得分类下的所有结点
         List<CourseCategoryTreeDTO> categoryTreeDTOs = courseCategoryMapper.selectTreeNodes(id);
         // 结点id -> 结点

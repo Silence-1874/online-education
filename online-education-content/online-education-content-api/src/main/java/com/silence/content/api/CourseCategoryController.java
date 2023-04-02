@@ -22,8 +22,8 @@ public class CourseCategoryController {
     private CourseCategoryService courseCategoryService;
 
     @GetMapping("/course-category/tree-nodes")
-    public List<CourseCategoryTreeDTO> queryTreeNodes() {
-        return courseCategoryService.queryTreeNodes("1");
+    public List<CourseCategoryTreeDTO> listTreeNode() {
+        return courseCategoryService.listTreeNode("1");
     }
 
 }
