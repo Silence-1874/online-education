@@ -27,4 +27,12 @@ public class CourseTeacherController {
         return courseTeacherService.queryCourseTeacherList(courseId);
     }
 
+    @ApiOperation("添加或修改教师")
+    @PostMapping("/courseTeacher")
+    public CourseTeacher upsertTeacher(@RequestBody CourseTeacher courseTeacher) {
+        // 暂时硬编码
+        Long companyId = 1232141425L;
+        return courseTeacherService.upsertCourseTeacher(companyId, courseTeacher);
+    }
+
 }

@@ -22,4 +22,11 @@ public interface CourseTeacherService extends IService<CourseTeacher> {
      */
     List<CourseTeacher> queryCourseTeacherList(long courseId);
 
+    /**
+     * @Author silence
+     * @Description 添加或修改教师信息
+     * @Date 2023/4/2
+     */
+    CourseTeacher upsertCourseTeacher(Long companyId, CourseTeacher courseTeacher);
+
 }
