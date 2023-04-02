@@ -6,15 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.silence.base.exception.MyException;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
-import com.silence.content.mapper.CourseBaseMapper;
-import com.silence.content.mapper.CourseCategoryMapper;
-import com.silence.content.mapper.CourseMarketMapper;
+import com.silence.content.mapper.*;
 import com.silence.content.model.dto.AddCourseDTO;
 import com.silence.content.model.dto.CourseBaseInfoDTO;
 import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.dto.UpdateCourseDTO;
-import com.silence.content.model.po.CourseBase;
-import com.silence.content.model.po.CourseMarket;
+import com.silence.content.model.po.*;
 import com.silence.content.service.CourseBaseInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -45,6 +42,15 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
 
     @Resource
     private CourseCategoryMapper courseCategoryMapper;
+
+    @Resource
+    private CourseTeacherMapper courseTeacherMapper;
+
+    @Resource
+    private TeachplanMapper teachplanMapper;
+
+    @Resource
+    private TeachplanMediaMapper teachplanMediaMapper;
 
     @Override
     public PageResult<CourseBase> queryCourseBaseList(PageParams pageParams, QueryCourseParamsDTO queryCourseParams) {
@@ -181,6 +187,32 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
             MyException.cast("修改课程失败");
         }
         return this.getCourseBaseInfo(courseId);
+    }
+
+    @Override
+    public void removeCourse(Long courseId) {
+        CourseBase courseBase = courseBaseMapper.selectById(courseId);
+        if (!courseBase.getAuditStatus().equals("202002")) {
+            MyException.cast("只能删除未提交审核的课程");
+        }
+        // 删除课程基本信息
+        courseBaseMapper.deleteById(courseId);
+        // 删除课程营销信息
+        LambdaQueryWrapper<CourseMarket> queryWrapper1 = new LambdaQueryWrapper<>();
+        queryWrapper1.eq(CourseMarket::getId, courseId);
+        courseMarketMapper.delete(queryWrapper1);
+        // 删除课程教学计划
+        LambdaQueryWrapper<Teachplan> queryWrapper2 = new LambdaQueryWrapper<>();
+        queryWrapper2.eq(Teachplan::getCourseId, courseId);
+        teachplanMapper.delete(queryWrapper2);
+        // 删除课程教学计划关联的媒资信息
+        LambdaQueryWrapper<TeachplanMedia> queryWrapper3 = new LambdaQueryWrapper<>();
+        queryWrapper3.eq(TeachplanMedia::getCourseId, courseId);
+        teachplanMediaMapper.delete(queryWrapper3);
+        // 删除课程师资信息
+        LambdaQueryWrapper<CourseTeacher>  queryWrapper4 = new LambdaQueryWrapper<>();
+        queryWrapper4.eq(CourseTeacher::getCourseId, courseId);
+        courseTeacherMapper.delete(queryWrapper4);
     }
 
 }

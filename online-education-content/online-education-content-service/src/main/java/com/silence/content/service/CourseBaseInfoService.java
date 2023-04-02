@@ -47,4 +47,11 @@ public interface CourseBaseInfoService extends IService<CourseBase> {
      */
     CourseBaseInfoDTO updateCourseBaseInfo(Long companyId, UpdateCourseDTO updateCourseDTO);
 
+    /**
+     * @Author silence
+     * @Description 删除课程
+     * @Date 2023/4/2
+     */
+    void removeCourse(Long courseId);
+
 }
