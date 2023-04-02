@@ -10,6 +10,7 @@ import com.silence.content.model.dto.UpdateCourseDTO;
 import com.silence.content.model.po.CourseBase;
 import com.silence.content.service.CourseBaseInfoService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -20,14 +21,14 @@ import org.springframework.web.bind.annotation.*;
  * @Description 课程查询接口
  * @Date 2023/3/19
  */
-@Api(value = "课程信息编辑接口",tags = "课程信息编辑接口")
 @RestController
+@Api(tags = "课程信息")
 public class CourseBaseInfoController {
 
     @Autowired
     private CourseBaseInfoService courseBaseInfoService;
 
-    @ApiOperation("课程查询接口")
+    @ApiOperation("课程查询")
     @PostMapping(value = "/course/list")
     public PageResult<CourseBase> listCourseBase(PageParams pageParams,
                                        @RequestBody(required = false) QueryCourseParamsDTO queryCourseParams) {
@@ -43,6 +44,7 @@ public class CourseBaseInfoController {
     }
 
     @ApiOperation("根据id查询课程基本信息")
+    @ApiImplicitParam(name = "courseId", value = "课程Id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/course/{courseId}")
     public CourseBaseInfoDTO getCourseBaseById(@PathVariable Long courseId) {
         return courseBaseInfoService.getCourseBaseById(courseId);
@@ -57,6 +59,7 @@ public class CourseBaseInfoController {
     }
 
     @ApiOperation("删除课程")
+    @ApiImplicitParam(name = "courseId", value = "课程Id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping("/course/{courseId}")
     public void removeCourseById(@PathVariable Long courseId) {
         courseBaseInfoService.removeCourseById(courseId);

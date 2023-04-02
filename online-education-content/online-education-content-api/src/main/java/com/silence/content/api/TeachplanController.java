@@ -5,6 +5,7 @@ import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.service.TeachplanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,34 +17,38 @@ import java.util.List;
  * @Description 教学计划接口
  * @Date 2023/3/28
  */
-@Api(value = "教学计划接口", tags = "教学计划接口")
 @RestController
+@Api(tags = "教学计划")
 public class TeachplanController {
 
     @Autowired
     TeachplanService teachplanService;
 
-    @ApiOperation("查询课程计划树形结构")
-    @ApiImplicitParam(value = "courseId",name = "课程Id",required = true,dataType = "Long",paramType = "path")
+    @ApiOperation("查询教学计划树")
+    @ApiImplicitParam(name = "courseId", value = "课程Id", dataType = "Long", paramType = "path", required = true)
     @GetMapping("teachplan/{courseId}/tree-nodes")
     public List<TeachplanTreeDTO> listTreeNode(@PathVariable Long courseId) {
         return teachplanService.listTreeNode(courseId);
     }
 
-    @ApiOperation("添加或修改课程计划")
+    @ApiOperation("添加或修改教学计划")
     @PostMapping("/teachplan")
     public void upsertTreeNode(@RequestBody UpsertTeachplanDTO teachplan) {
         teachplanService.upsertTeachplan(teachplan);
     }
 
-    @ApiOperation("删除课程计划")
-    @ApiImplicitParam(value = "courseId",name = "课程Id",required = true,dataType = "Long",paramType = "path")
+    @ApiOperation("删除教学计划")
+    @ApiImplicitParam(name = "courseId", value = "课程Id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping("/teachplan/{courseId}")
     public void removeTreeNode(@PathVariable Long courseId) {
         teachplanService.removeTreeNode(courseId);
     }
 
     @ApiOperation("移动计划顺序")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "direction", value = "移动方向，-1为向下移动，1为向上移动", dataType = "String", paramType = "path", required = true),
+            @ApiImplicitParam(name = "id", value = "教学计划id", dataType = "Long", paramType = "path", required = true)
+    })
     @PostMapping("/teachplan/{direction}/{id}")
     public void moveOrder(@PathVariable String direction, @PathVariable Long id) {
         int dir = 0;

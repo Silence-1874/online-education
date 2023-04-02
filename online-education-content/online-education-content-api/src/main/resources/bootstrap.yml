@@ -19,8 +19,10 @@ spring:
 logging:
   config: classpath:log4j2-dev.xml
 swagger:
-  title: "在线教育内容管理系统"
-  description: "内容系统管理系统对课程相关信息进行管理"
+  title: "内容管理系统"
+  description: "管理课程相关信息，如营销信息、教学计划、课程师资等。"
   base-package: com.silence.content
   enabled: true
   version: 1.0.0
+  contact:
+    name: silence

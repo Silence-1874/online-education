@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2023/3/28
  */
 @Data
-@ApiModel(value = "TeachplanDTO", description = "教学计划")
+@ApiModel(value = "TeachplanTreeDTO", description = "教学计划")
 public class TeachplanTreeDTO extends Teachplan {
 
     @ApiModelProperty("课程关联的媒资信息")

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  * @Date 2023/3/24
  */
 @Data
-@ApiModel(value="AddCourseDTO", description="新增课程基本信息")
+@ApiModel(value = "AddCourseDTO", description = "新增课程基本信息")
 public class AddCourseDTO {
 
     @NotEmpty(groups = {ValidationGroups.Insert.class}, message = "添加课程名称不能为空")

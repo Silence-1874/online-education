@@ -1,6 +1,8 @@
 package com.silence.content.model.dto;
 
 import com.silence.content.model.po.CourseBase;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -9,52 +11,34 @@ import lombok.Data;
  * @Date 2023/3/24
  */
 @Data
+@ApiModel(value="CourseBaseInfoDTO", description="课程基本信息")
 public class CourseBaseInfoDTO extends CourseBase {
 
-    /**
-     * 收费规则，对应数据字典
-     */
+    @ApiModelProperty("收费规则，对应数据字典")
     private String charge;
 
-    /**
-     * 价格
-     */
+    @ApiModelProperty("价格")
     private Float price;
 
-
-    /**
-     * 原价
-     */
+    @ApiModelProperty("原价")
     private Float originalPrice;
 
-    /**
-     * 咨询qq
-     */
+    @ApiModelProperty("咨询qq")
     private String qq;
 
-    /**
-     * 微信
-     */
+    @ApiModelProperty("微信")
     private String wechat;
 
-    /**
-     * 电话
-     */
+    @ApiModelProperty("电话")
     private String phone;
 
-    /**
-     * 有效期天数
-     */
+    @ApiModelProperty("有效期天数")
     private Integer validDays;
 
-    /**
-     * 大分类名称
-     */
+    @ApiModelProperty("大分类名称")
     private String mtName;
 
-    /**
-     * 小分类名称
-     */
+    @ApiModelProperty("小分类名称")
     private String stName;
 
 }

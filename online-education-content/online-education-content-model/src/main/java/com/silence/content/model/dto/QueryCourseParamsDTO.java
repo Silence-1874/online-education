@@ -1,5 +1,6 @@
 package com.silence.content.model.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
  * @Date 2023/3/19
  */
 @Data
+@ApiModel(value = "QueryCourseParamsDTO", description = "查询课程请求参数")
 public class QueryCourseParamsDTO {
 
     @ApiModelProperty("审核状态")
