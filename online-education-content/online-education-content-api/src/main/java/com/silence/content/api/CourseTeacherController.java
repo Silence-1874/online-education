@@ -30,9 +30,17 @@ public class CourseTeacherController {
         return courseTeacherService.listTeacher(courseId);
     }
 
-    @ApiOperation("添加或修改教师")
+    @ApiOperation("添加教师")
     @PostMapping("/courseTeacher")
-    public CourseTeacher upsertTeacher(@RequestBody CourseTeacher courseTeacher) {
+    public CourseTeacher saveTeacher(@RequestBody CourseTeacher courseTeacher) {
+        // 暂时硬编码
+        Long companyId = 1232141425L;
+        return courseTeacherService.upsertTeacher(companyId, courseTeacher);
+    }
+
+    @ApiOperation("修改教师")
+    @PutMapping("/courseTeacher")
+    public CourseTeacher updateTeacher(@RequestBody CourseTeacher courseTeacher) {
         // 暂时硬编码
         Long companyId = 1232141425L;
         return courseTeacherService.upsertTeacher(companyId, courseTeacher);
