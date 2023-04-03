@@ -19,6 +19,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static com.silence.base.enums.CourseAuditStatusEnum.PASSED;
+import static com.silence.base.enums.CoursePublicStatusEnum.NOT_PUBLISH;
+
 @SpringBootTest
 class OnlineEducationContentServiceApplicationTests {
 
@@ -35,7 +38,7 @@ class OnlineEducationContentServiceApplicationTests {
         // 查询条件
         QueryCourseParamsDTO queryCourseParamsDTO = new QueryCourseParamsDTO();
         queryCourseParamsDTO.setCourseName("java");
-        queryCourseParamsDTO.setAuditStatus("202004");
+        queryCourseParamsDTO.setAuditStatus(PASSED.getCode());
         // 拼接查询条件
         queryWrapper
                 .like(StringUtils.isNotEmpty(queryCourseParamsDTO.getCourseName()), CourseBase::getName, queryCourseParamsDTO.getCourseName())
@@ -63,8 +66,8 @@ class OnlineEducationContentServiceApplicationTests {
         //查询条件
         QueryCourseParamsDTO queryCourseParamsDto = new QueryCourseParamsDTO();
         queryCourseParamsDto.setCourseName("java");
-        queryCourseParamsDto.setAuditStatus("202004");
-        queryCourseParamsDto.setPublishStatus("203001");
+        queryCourseParamsDto.setAuditStatus(PASSED.getCode());
+        queryCourseParamsDto.setPublishStatus(NOT_PUBLISH.getCode());
 
         //分页参数
         PageParams pageParams = new PageParams();

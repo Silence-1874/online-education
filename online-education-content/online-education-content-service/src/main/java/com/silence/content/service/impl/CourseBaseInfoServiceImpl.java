@@ -23,6 +23,11 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.silence.base.enums.CourseAuditStatusEnum.NOT_COMMIT;
+import static com.silence.base.enums.CourseChargeTypeEnum.CHARGE;
+import static com.silence.base.enums.CourseChargeTypeEnum.FREE;
+import static com.silence.base.enums.CoursePublicStatusEnum.NOT_PUBLISH;
+
 /**
  * <p>
  * 课程基本信息 服务实现类
@@ -100,8 +105,8 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
         CourseBase courseBaseNew = new CourseBase();
         BeanUtils.copyProperties(addCourseDTO, courseBaseNew);
         courseBaseNew.setCompanyId(companyId);
-        courseBaseNew.setAuditStatus("202002");
-        courseBaseNew.setStatus("203001");
+        courseBaseNew.setAuditStatus(NOT_COMMIT.getCode());
+        courseBaseNew.setStatus(NOT_PUBLISH.getCode());
         courseBaseNew.setCreateDate(LocalDateTime.now());
         if (courseBaseMapper.insert(courseBaseNew) <= 0) {
             throw new MyException("新增课程基本信息失败");
@@ -126,13 +131,13 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
 
     private int upsertCourseMarket(CourseMarket courseMarketNew) {
         // 课程收费时价格参数校验
-        if ("201001".equals(courseMarketNew.getCharge())) {
+        if (CHARGE.getCode().equals(courseMarketNew.getCharge())) {
             Float price = courseMarketNew.getPrice();
             if (price == null || price <= 0) {
                 throw new MyException("价格不合法");
             }
         }
-        if ("201000".equals(courseMarketNew.getCharge())) {
+        if (FREE.getCode().equals(courseMarketNew.getCharge())) {
             courseMarketNew.setPrice(0f);
             courseMarketNew.setOriginalPrice(0f);
         }
@@ -192,7 +197,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseBaseMapper, Cou
     @Override
     public void removeCourseById(Long courseId) {
         CourseBase courseBase = courseBaseMapper.selectById(courseId);
-        if (!courseBase.getAuditStatus().equals("202002")) {
+        if (!courseBase.getAuditStatus().equals(NOT_COMMIT.getCode())) {
             MyException.cast("只能删除未提交审核的课程");
         }
         // 删除课程基本信息
