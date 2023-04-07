@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: content-service
+  cloud:
+    nacos:
+      server-addr: 119.8.5.119:8848
+      config:
+        namespace: c919c5f2-6459-49f3-bb25-042a433e9896
+        group: online-education
+        file-extension: yaml
+        refresh-enabled: true
+  profiles:
+    active: dev
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://119.8.50.119:3306/oe_content?serverTimezone=UTC&userUnicode=true&useSSL=false
+#    username: root
+#    password: 123
+logging:
+  config: classpath:log4j2-dev.xml
