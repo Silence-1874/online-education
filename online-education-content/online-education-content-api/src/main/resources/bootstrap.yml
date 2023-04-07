@@ -20,6 +20,13 @@ spring:
           - data-id: content-service-${spring.profiles.active}.yaml
             group: online-education
             refresh: true
+        shared-configs:
+          - data-id: swagger-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
   profiles:
     active: dev
 #  datasource:
