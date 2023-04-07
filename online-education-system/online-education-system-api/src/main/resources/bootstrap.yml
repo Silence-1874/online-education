@@ -1,7 +1,7 @@
-server:
-  servlet:
-    context-path: /system
-  port: 63110
+#server:
+#  servlet:
+#    context-path: /system
+#  port: 63110
 #微服务配置
 spring:
   application:
@@ -12,19 +12,37 @@ spring:
       discovery:
         namespace: c919c5f2-6459-49f3-bb25-042a433e9896
         group: online-education
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://119.8.50.119:3306/oe_system?serverTimezone=UTC&userUnicode=true&useSSL=false
-    username: root
-    password: 123
+      config:
+        namespace: c919c5f2-6459-49f3-bb25-042a433e9896
+        group: online-education
+        file-extension: yaml
+        refresh-enabled: true
+        extension-configs:
+          - data-id: system-service-${spring.profiles.active}.yaml
+            group: online-education
+            refresh: true
+        shared-configs:
+          - data-id: swagger-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+  profiles:
+    active: dev
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://119.8.50.119:3306/oe_system?serverTimezone=UTC&userUnicode=true&useSSL=false
+#    username: root
+#    password: 123
 # 日志文件配置路径
-logging:
-  config: classpath:log4j2-dev.xml
-
-# swagger 文档配置
-swagger:
-  title: "在线教育系统管理"
-  description: "系统管理接口"
-  base-package: com.silence.system
-  enabled: true
-  version: 1.0.0
+#logging:
+#  config: classpath:log4j2-dev.xml
+#
+## swagger 文档配置
+#swagger:
+#  title: "在线教育系统管理"
+#  description: "系统管理接口"
+#  base-package: com.silence.system
+#  enabled: true
+#  version: 1.0.0
