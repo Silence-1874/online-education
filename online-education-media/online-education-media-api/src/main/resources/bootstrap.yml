@@ -1,0 +1,31 @@
+server:
+  port: 63050
+#微服务配置
+spring:
+  application:
+    name: media-api
+  cloud:
+    nacos:
+      server-addr: 119.8.50.119:8848
+      discovery:
+        namespace: c919c5f2-6459-49f3-bb25-042a433e9896
+        group: online-education
+      config:
+        namespace: c919c5f2-6459-49f3-bb25-042a433e9896
+        group: online-education
+        file-extension: yaml
+        refresh-enabled: true
+        extension-configs:
+          - data-id: media-service-${spring.profiles.active}.yaml
+            group: online-education
+            refresh: true
+        shared-configs:
+          - data-id: swagger-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+  profiles:
+    active: dev
+
