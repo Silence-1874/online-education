@@ -1,5 +1,5 @@
 ### 查询课程信息
-POST {{content_host}}/content/course/list?pageNo=1&pageSize=10
+POST {{gateway_host}}/content/course/list?pageNo=1&pageSize=10
 Content-Type: application/json
 
 {
@@ -8,6 +8,9 @@ Content-Type: application/json
   "publishStatus": "203001"
 }
 
+<> 2023-04-08T125117.200.json
+<> 2023-04-08T124644.500.json
+<> 2023-04-08T095056.404.json
 <> 2023-03-21T094008.200.json
 <> 2023-03-21T091457.200.json
 <> 2023-03-21T091450.200.json
