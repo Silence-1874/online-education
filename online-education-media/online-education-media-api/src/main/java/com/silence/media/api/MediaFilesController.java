@@ -1,16 +1,21 @@
 package com.silence.media.api;
 
+import com.silence.base.enums.MediaTypeEnum;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
-import com.silence.media.model.dto.QueryMediaParamsDto;
+import com.silence.media.model.dto.QueryMediaParamsDTO;
+import com.silence.media.model.dto.UploadFileParamsDTO;
 import com.silence.media.model.po.MediaFiles;
 import com.silence.media.service.MediaFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author silence
@@ -29,10 +34,28 @@ public class MediaFilesController {
 
     @ApiOperation("媒资列表查询接口")
     @PostMapping("/files")
-    public PageResult<MediaFiles> list(PageParams pageParams, @RequestBody QueryMediaParamsDto queryMediaParamsDto) {
+    public PageResult<MediaFiles> list(PageParams pageParams, @RequestBody QueryMediaParamsDTO queryMediaParamsDto) {
         Long companyId = 1232141425L;
-        return mediaFileService.queryMediaFiels(companyId, pageParams, queryMediaParamsDto);
+        return mediaFileService.queryMediaFiles(companyId, pageParams, queryMediaParamsDto);
 
+    }
+
+    @ApiOperation("上传文件")
+    @PostMapping(value = "/upload/coursefile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public MediaFiles upload(@RequestPart("filedata") MultipartFile filedata) throws IOException {
+        Long companyId = 1232141425L;
+        // 通过创建的临时文件获得文件路径
+        File tempFile = File.createTempFile("minio", ".temp");
+        filedata.transferTo(tempFile);
+        String localFilePath = tempFile.getAbsolutePath();
+        // 准备上传文件信息
+        UploadFileParamsDTO uploadFileParamsDTO = new UploadFileParamsDTO();
+        uploadFileParamsDTO.setFilename(filedata.getOriginalFilename());
+        uploadFileParamsDTO.setFileSize(filedata.getSize());
+        uploadFileParamsDTO.setFileType(MediaTypeEnum.IMAGE.getCode());
+        // 上传文件
+        MediaFiles mediaFile = mediaFileService.uploadFile(companyId, uploadFileParamsDTO, localFilePath);
+        return mediaFile;
     }
 
 }

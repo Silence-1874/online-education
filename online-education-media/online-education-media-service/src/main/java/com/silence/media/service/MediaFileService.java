@@ -2,7 +2,8 @@ package com.silence.media.service;
 
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
-import com.silence.media.model.dto.QueryMediaParamsDto;
+import com.silence.media.model.dto.QueryMediaParamsDTO;
+import com.silence.media.model.dto.UploadFileParamsDTO;
 import com.silence.media.model.po.MediaFiles;
 
 /**
@@ -21,7 +22,14 @@ public interface MediaFileService {
      * @author silence
      * @date 2023/4/8
      */
-    public PageResult<MediaFiles> queryMediaFiels(Long companyId, PageParams pageParams, QueryMediaParamsDto queryMediaParamsDto);
+    PageResult<MediaFiles> queryMediaFiles(Long companyId, PageParams pageParams, QueryMediaParamsDTO queryMediaParamsDto);
+
+    /**
+     * @Author silence
+     * @Description 上传文件
+     * @Date 2023/4/11
+     */
+    MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath);
 
 
 }

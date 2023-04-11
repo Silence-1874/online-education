@@ -1,5 +1,6 @@
 package com.silence.media.model.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
@@ -12,7 +13,8 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class QueryMediaParamsDto {
+@ApiModel(value = "QueryMediaParamsDTO", description = "媒资文件查询请求模型类")
+public class QueryMediaParamsDTO {
 
     @ApiModelProperty("媒资文件名称")
     private String filename;
