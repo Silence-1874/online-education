@@ -138,12 +138,8 @@ public class MediaFileServiceImpl implements MediaFileService {
         return false;
     }
 
-    /**
-     * @Author silence
-     * @Description 将媒资信息写入到数据库
-     * @Date 2023/4/11
-     */
     @Transactional
+    @Override
     public MediaFiles saveMediaFiles2Db(Long companyId, String fileMd5, UploadFileParamsDTO uploadFileParamsDTO,
                                         String bucket, String objectName) {
         MediaFiles mediaFiles = mediaFilesMapper.selectById(fileMd5);
@@ -170,7 +166,9 @@ public class MediaFileServiceImpl implements MediaFileService {
         return mediaFiles;
     }
 
-    @Transactional
+    @Autowired
+    MediaFileService currentProxy;
+
     @Override
     public MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath) {
         File file = new File(localFilePath);
@@ -189,7 +187,7 @@ public class MediaFileServiceImpl implements MediaFileService {
             MyException.cast("文件上传失败");
         }
         // 将文件信息存储到数据库
-        MediaFiles mediaFiles = saveMediaFiles2Db(companyId, fileMd5, uploadFileParamsDTO, bucketFiles, objectName);
+        MediaFiles mediaFiles = currentProxy.saveMediaFiles2Db(companyId, fileMd5, uploadFileParamsDTO, bucketFiles, objectName);
         //准备返回数据
         MediaFiles result = new MediaFiles();
         BeanUtils.copyProperties(mediaFiles, result);

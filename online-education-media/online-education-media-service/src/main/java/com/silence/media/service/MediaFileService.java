@@ -31,5 +31,12 @@ public interface MediaFileService {
      */
     MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath);
 
+    /**
+     * @Author silence
+     * @Description 将媒资信息写入到数据库
+     * @Date 2023/4/11
+     */
+    MediaFiles saveMediaFiles2Db(Long companyId, String fileMd5, UploadFileParamsDTO uploadFileParamsDTO, String bucket, String objectName);
+
 
 }
