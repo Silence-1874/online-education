@@ -3,6 +3,7 @@ package com.silence.media.api;
 import com.silence.base.enums.MediaTypeEnum;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
+import com.silence.base.model.RestResponse;
 import com.silence.media.model.dto.QueryMediaParamsDTO;
 import com.silence.media.model.dto.UploadFileParamsDTO;
 import com.silence.media.model.po.MediaFiles;
@@ -56,6 +57,47 @@ public class MediaFilesController {
         // 上传文件
         MediaFiles mediaFile = mediaFileService.uploadFile(companyId, uploadFileParamsDTO, localFilePath);
         return mediaFile;
+    }
+
+    @ApiOperation(value = "文件上传前的检查")
+    @PostMapping("/upload/checkfile")
+    public RestResponse<Boolean> checkFile(@RequestParam("fileMd5") String fileMd5) {
+        return mediaFileService.checkFile(fileMd5);
+    }
+
+    @ApiOperation(value = "分块上传前的检查")
+    @PostMapping("/upload/checkchunk")
+    public RestResponse<Boolean> checkchunk(@RequestParam("fileMd5") String fileMd5,
+                                            @RequestParam("chunk") int chunk) {
+        return mediaFileService.checkChunk(fileMd5,chunk);
+    }
+
+
+    @ApiOperation(value = "上传分块文件")
+    @PostMapping("/upload/uploadchunk")
+    public RestResponse uploadchunk(@RequestParam("file") MultipartFile file,
+                                    @RequestParam("fileMd5") String fileMd5,
+                                    @RequestParam("chunk") int chunk) throws IOException {
+        // 创建临时文件
+        File tempFile = File.createTempFile("minio", "temp");
+        // 将上传的文件拷贝到临时文件
+        file.transferTo(tempFile);
+        // 获得文件路径
+        String absolutePath = tempFile.getAbsolutePath();
+        return mediaFileService.uploadChunk(fileMd5, chunk, absolutePath);
+    }
+
+    @ApiOperation(value = "合并文件")
+    @PostMapping("/upload/mergechunks")
+    public RestResponse mergechunks(@RequestParam("fileMd5") String fileMd5,
+                                    @RequestParam("fileName") String fileName,
+                                    @RequestParam("chunkTotal") int chunkTotal) {
+        Long companyId = 1232141425L;
+        UploadFileParamsDTO uploadFileParamsDTO = new UploadFileParamsDTO();
+        uploadFileParamsDTO.setFilename(fileName);
+        uploadFileParamsDTO.setTags("课程视频");
+        uploadFileParamsDTO.setFileType(MediaTypeEnum.VIDEO.getCode());
+        return mediaFileService.mergeChunks(companyId, fileMd5, chunkTotal, uploadFileParamsDTO);
     }
 
 }
