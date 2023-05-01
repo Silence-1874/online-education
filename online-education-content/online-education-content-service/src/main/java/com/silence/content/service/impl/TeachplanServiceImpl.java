@@ -6,6 +6,7 @@ import com.silence.base.exception.CommonError;
 import com.silence.base.exception.MyException;
 import com.silence.content.mapper.TeachplanMapper;
 import com.silence.content.mapper.TeachplanMediaMapper;
+import com.silence.content.model.dto.BindTeachplanMediaDTO;
 import com.silence.content.model.dto.TeachplanTreeDTO;
 import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.model.po.Teachplan;
@@ -130,6 +131,29 @@ public class TeachplanServiceImpl extends ServiceImpl<TeachplanMapper, Teachplan
         } else {
             MyException.cast(CommonError.PARAMS_ERROR);
         }
+    }
+
+    @Transactional
+    @Override
+    public TeachplanMedia associateMedia(BindTeachplanMediaDTO bindTeachplanMediaDTO) {
+        Long teachplanId = bindTeachplanMediaDTO.getTeachplanId();
+        Teachplan teachplan = teachplanMapper.selectById(teachplanId);
+        if (teachplan == null) {
+            MyException.cast("教学计划不存在");
+        }
+        Integer grade = teachplan.getGrade();
+        if (grade != 2) {
+            MyException.cast("只允许第二级教学计划绑定媒资文件");
+        }
+        // 删除原来绑定的媒资
+        teachplanMediaMapper.delete(new LambdaQueryWrapper<TeachplanMedia>().eq(TeachplanMedia::getTeachplanId, teachplanId));
+        // 添加新绑定媒资
+        TeachplanMedia teachplanMedia = new TeachplanMedia();
+        BeanUtils.copyProperties(bindTeachplanMediaDTO, teachplanMedia);
+        teachplanMedia.setCourseId(teachplan.getCourseId());
+        teachplanMedia.setMediaFilename(bindTeachplanMediaDTO.getFileName());
+        teachplanMediaMapper.insert(teachplanMedia);
+        return null;
     }
 
 }

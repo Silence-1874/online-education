@@ -362,7 +362,7 @@ public class MediaFileServiceImpl implements MediaFileService {
                 return RestResponse.validfail(false, "文件md5校验失败");
             }
         } catch (Exception e) {
-            log.debug("校验文件失败,fileMd5:{},异常:{}",fileMd5,e.getMessage(),e);
+            log.debug("校验文件失败,fileMd5:{},异常:{}", fileMd5, e.getMessage(), e);
             return RestResponse.validfail(false, "文件合并校验失败，最终上传失败");
         }
         // 将文件信息入库

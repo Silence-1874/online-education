@@ -1,5 +1,6 @@
 package com.silence.content.api;
 
+import com.silence.content.model.dto.BindTeachplanMediaDTO;
 import com.silence.content.model.dto.TeachplanTreeDTO;
 import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.service.TeachplanService;
@@ -58,6 +59,12 @@ public class TeachplanController {
             dir = 1;
         }
         teachplanService.moveOrder(dir, id);
+    }
+
+    @ApiOperation(value = "绑定课程计划与媒资信息")
+    @PostMapping("/teachplan/association/media")
+    public void associateMedia(@RequestBody BindTeachplanMediaDTO bindTeachplanMediaDTO) {
+        teachplanService.associateMedia(bindTeachplanMediaDTO);
     }
 
 }

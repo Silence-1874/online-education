@@ -1,9 +1,11 @@
 package com.silence.content.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.silence.content.model.dto.BindTeachplanMediaDTO;
 import com.silence.content.model.dto.TeachplanTreeDTO;
 import com.silence.content.model.dto.UpsertTeachplanDTO;
 import com.silence.content.model.po.Teachplan;
+import com.silence.content.model.po.TeachplanMedia;
 
 import java.util.List;
 
@@ -44,5 +46,12 @@ public interface TeachplanService extends IService<Teachplan> {
      * @Date 2023/4/1
      */
     void moveOrder(int direction, long id);
+
+    /**
+     * @Author silence
+     * @Description 绑定课程与媒资信息
+     * @Date 2023/5/1
+     */
+    TeachplanMedia associateMedia(BindTeachplanMediaDTO bindTeachplanMediaDTO);
 
 }
