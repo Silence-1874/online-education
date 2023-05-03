@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.silence.content.model.dto.CoursePreviewDTO;
 import com.silence.content.model.po.CoursePublish;
 
+import java.io.File;
+
 /**
  * <p>
  * 课程发布 服务类
@@ -34,5 +36,19 @@ public interface CoursePublishService extends IService<CoursePublish> {
      * @Date 2023/5/3
      */
     void publish(Long companyId, Long courseId);
+
+    /**
+     * @Author silence
+     * @Description 课程页面静态化
+     * @Date 2023/5/3
+     */
+    File generateCourseHtml(Long courseId);
+
+    /**
+     * @Author silence
+     * @Description 上传静态化页面
+     * @Date 2023/5/3
+     */
+    void uploadCourseHtml(Long courseId, File file);
 
 }

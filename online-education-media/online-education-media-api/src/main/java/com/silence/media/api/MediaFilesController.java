@@ -43,7 +43,8 @@ public class MediaFilesController {
 
     @ApiOperation("上传文件")
     @PostMapping(value = "/upload/coursefile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public MediaFiles upload(@RequestPart("filedata") MultipartFile filedata) throws IOException {
+    public MediaFiles upload(@RequestPart("filedata") MultipartFile filedata,
+                             @RequestParam(value = "objectName", required = false) String objectName) throws IOException {
         Long companyId = 1232141425L;
         // 通过创建的临时文件获得文件路径
         File tempFile = File.createTempFile("minio", ".temp");
@@ -69,7 +70,7 @@ public class MediaFilesController {
     @PostMapping("/upload/checkchunk")
     public RestResponse<Boolean> checkchunk(@RequestParam("fileMd5") String fileMd5,
                                             @RequestParam("chunk") int chunk) {
-        return mediaFileService.checkChunk(fileMd5,chunk);
+        return mediaFileService.checkChunk(fileMd5, chunk);
     }
 
 

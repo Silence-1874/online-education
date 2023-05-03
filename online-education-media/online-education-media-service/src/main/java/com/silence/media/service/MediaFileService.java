@@ -31,7 +31,7 @@ public interface MediaFileService extends IService<MediaFiles> {
      * @Description 上传文件
      * @Date 2023/4/11
      */
-    MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath);
+    MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath, String objectName);
 
     /**
      * @Author silence

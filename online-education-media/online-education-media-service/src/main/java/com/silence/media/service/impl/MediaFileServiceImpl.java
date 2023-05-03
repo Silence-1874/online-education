@@ -21,6 +21,7 @@ import io.minio.messages.DeleteObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -180,7 +181,7 @@ public class MediaFileServiceImpl extends ServiceImpl<MediaFilesMapper, MediaFil
     MediaFileService currentProxy;
 
     @Override
-    public MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath) {
+    public MediaFiles uploadFile(Long companyId, UploadFileParamsDTO uploadFileParamsDTO, String localFilePath, String objectName) {
         File file = new File(localFilePath);
         if (!file.exists()) {
             MyException.cast("文件不存在");
@@ -191,7 +192,9 @@ public class MediaFileServiceImpl extends ServiceImpl<MediaFilesMapper, MediaFil
         String mimeType = getMimeType(extension);
         String fileMd5 = getFileMd5(file);
         String defaultFolderPath = getDefaultFolderPath();
-        String objectName = defaultFolderPath + fileMd5 + extension;
+        if (StringUtils.isEmpty(objectName)) {
+            objectName = defaultFolderPath + fileMd5 + extension;
+        }
         boolean b = saveMediaFiles2Minio(localFilePath, mimeType, bucketFiles, objectName);
         if (!b) {
             MyException.cast("文件上传失败");
