@@ -3,6 +3,8 @@ package com.silence.content.service.jobhandler;
 import com.silence.messagesdk.model.po.MqMessage;
 import com.silence.messagesdk.service.MessageProcessAbstract;
 import com.silence.messagesdk.service.MqMessageService;
+import com.xxl.job.core.context.XxlJobHelper;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,17 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class CoursePublishTask extends MessageProcessAbstract {
+
+    //任务调度入口
+    @XxlJob("CoursePublishJobHandler")
+    public void coursePublishJobHandler() throws Exception {
+        // 分片参数
+        int shardIndex = XxlJobHelper.getShardIndex();
+        int shardTotal = XxlJobHelper.getShardTotal();
+        log.debug("shardIndex="+shardIndex+",shardTotal="+shardTotal);
+        // 参数:分片序号、分片总数、消息类型、一次最多取到的任务数量、一次任务调度执行的超时时间
+        process(shardIndex,shardTotal,"course_publish",30,60);
+    }
 
     @Override
     public boolean execute(MqMessage mqMessage) {
