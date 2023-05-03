@@ -2,6 +2,7 @@ package com.silence.media.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.j256.simplemagic.ContentInfo;
 import com.j256.simplemagic.ContentInfoUtil;
 import com.silence.base.enums.CourseAuditStatusEnum;
@@ -43,7 +44,7 @@ import java.util.stream.Stream;
  */
 @Slf4j
 @Service
-public class MediaFileServiceImpl implements MediaFileService {
+public class MediaFileServiceImpl extends ServiceImpl<MediaFilesMapper, MediaFiles> implements MediaFileService {
 
     @Value("${minio.bucket.files}")
     private String bucket_mediafiles;

@@ -1,5 +1,6 @@
 package com.silence.media.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.silence.base.model.PageParams;
 import com.silence.base.model.PageResult;
 import com.silence.base.model.RestResponse;
@@ -13,7 +14,7 @@ import com.silence.media.model.po.MediaFiles;
  * @description 媒资文件管理业务类
  * @date 2023/4/8
  */
-public interface MediaFileService {
+public interface MediaFileService extends IService<MediaFiles> {
 
     /**
      * @param pageParams          分页参数
