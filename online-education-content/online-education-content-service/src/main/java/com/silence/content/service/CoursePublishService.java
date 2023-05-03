@@ -21,4 +21,11 @@ public interface CoursePublishService extends IService<CoursePublish> {
      */
     CoursePreviewDTO getCoursePreviewInfo(Long courseId);
 
+    /**
+     * @Author silence
+     * @Description 提交审核
+     * @Date 2023/5/3
+     */
+    void commitAudit(Long companyId, Long courseId);
+
 }
