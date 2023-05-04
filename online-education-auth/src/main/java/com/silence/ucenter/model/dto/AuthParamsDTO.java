@@ -11,7 +11,7 @@ import java.util.Map;
  * @Date 2023/5/4
  */
 @Data
-public class AuthParamsDto {
+public class AuthParamsDTO {
 
     /**
      * 用户名
