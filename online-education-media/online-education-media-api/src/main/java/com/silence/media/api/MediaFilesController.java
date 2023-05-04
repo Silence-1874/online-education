@@ -56,7 +56,7 @@ public class MediaFilesController {
         uploadFileParamsDTO.setFileSize(filedata.getSize());
         uploadFileParamsDTO.setFileType(MediaTypeEnum.IMAGE.getCode());
         // 上传文件
-        MediaFiles mediaFile = mediaFileService.uploadFile(companyId, uploadFileParamsDTO, localFilePath);
+        MediaFiles mediaFile = mediaFileService.uploadFile(companyId, uploadFileParamsDTO, localFilePath, objectName);
         return mediaFile;
     }
 
