@@ -9,6 +9,7 @@ import com.silence.content.model.dto.QueryCourseParamsDTO;
 import com.silence.content.model.dto.UpdateCourseDTO;
 import com.silence.content.model.po.CourseBase;
 import com.silence.content.service.CourseBaseInfoService;
+import com.silence.content.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -47,6 +48,9 @@ public class CourseBaseInfoController {
     @ApiImplicitParam(name = "courseId", value = "课程Id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/course/{courseId}")
     public CourseBaseInfoDTO getCourseBaseById(@PathVariable Long courseId) {
+        //取出当前用户身份
+        SecurityUtil.OeUser user = SecurityUtil.getUser();
+        System.out.println(user);
         return courseBaseInfoService.getCourseBaseById(courseId);
     }
 
