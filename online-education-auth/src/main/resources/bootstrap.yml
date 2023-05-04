@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: auth-service
+  cloud:
+    nacos:
+      server-addr: 119.8.50.119:8848
+      discovery:
+        namespace: c919c5f2-6459-49f3-bb25-042a433e9896
+        group: online-education
+      config:
+        namespace: c919c5f2-6459-49f3-bb25-042a433e9896
+        group: online-education
+        file-extension: yaml
+        refresh-enabled: true
+        shared-configs:
+          - data-id: swagger-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: online-education-common
+            refresh: true
+
+  profiles:
+    active: dev
