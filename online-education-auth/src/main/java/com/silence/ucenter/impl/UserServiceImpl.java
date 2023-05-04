@@ -1,5 +1,6 @@
 package com.silence.ucenter.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.silence.ucenter.mapper.OeUserMapper;
 import com.silence.ucenter.model.po.OeUser;
@@ -37,7 +38,9 @@ public class UserServiceImpl implements UserDetailsService {
         }
         String password = user.getPassword();
         String[] authorities= {"test"};
-        return User.withUsername(user.getUsername()).password(password).authorities(authorities).build();
+        user.setPassword(null);
+        String userString = JSON.toJSONString(user);
+        return User.withUsername(userString).password(password).authorities(authorities).build();
     }
 
 }
